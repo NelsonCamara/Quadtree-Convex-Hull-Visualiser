@@ -153,6 +153,4 @@ Le programme affiche une fenetre 512x512 avec :
 - **SIG** : Analyse spatiale
 - **Computer Vision** : Detection de contours
 
-## Licence
 
-MIT License
