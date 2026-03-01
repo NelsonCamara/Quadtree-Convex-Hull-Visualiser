@@ -1,51 +1,51 @@
 # Quadtree & Convex Hull
 
-Implementation en C d'un algorithme d'enveloppe convexe avec visualisation graphique utilisant la bibliotheque MLV.
+Implémentation en C d'un algorithme d'enveloppe convexe avec visualisation graphique utilisant la bibliothèque MLV.
 
 ## Description
 
-Ce projet implemente deux structures de donnees fondamentales en geometrie computationnelle :
+Ce projet implémente deux structures de données fondamentales en géométrie computationnelle :
 
-1. **Enveloppe Convexe (Convex Hull)** : Calcul incremental de l'enveloppe convexe d'un ensemble de points
+1. **Enveloppe Convexe (Convex Hull)** : Calcul incrémental de l'enveloppe convexe d'un ensemble de points
 2. **Quadtree** : Structure de partitionnement spatial pour l'indexation efficace de points 2D
 
-## Fonctionnalites
+## Fonctionnalités
 
 ### Enveloppe Convexe (`main.c`)
 
-- **Generation aleatoire** : Creation de points dans un carre ou un cercle
-- **Algorithme incremental** : Construction pas-a-pas de l'enveloppe convexe
-- **Mode interactif** : Ajout de points par clic souris avec mise a jour en temps reel
-- **Visualisation** : Affichage graphique de l'enveloppe a chaque etape
-- **Liste doublement chainee circulaire** : Structure de donnees optimisee pour les insertions/suppressions
+- **Génération aléatoire** : Création de points dans un carré ou un cercle
+- **Algorithme incrémental** : Construction pas-à-pas de l'enveloppe convexe
+- **Mode interactif** : Ajout de points par clic souris avec mise à jour en temps réel
+- **Visualisation** : Affichage graphique de l'enveloppe à chaque étape
+- **Liste doublement chaînée circulaire** : Structure de données optimisée pour les insertions/suppressions
 
 ### Quadtree (`quadtree.c`)
 
-- **Partitionnement recursif** : Division automatique de l'espace en quadrants
+- **Partitionnement récursif** : Division automatique de l'espace en quadrants
 - **Gestion dynamique** : Ajout et suppression de particules
-- **Seuil configurable** : Division declenchee apres N points par noeud
+- **Seuil configurable** : Division déclenchée après N points par nœud
 
 ## Technologies
 
 - **Langage C** (C99)
-- **Bibliotheque MLV** - Graphiques 2D
-- **Structures de donnees** : Listes chainees, arbres quaternaires
+- **Bibliothèque MLV** - Graphiques 2D
+- **Structures de données** : Listes chaînées, arbres quaternaires
 
 ## Structure du projet
 
 ```
 src/
 ├── main.c       # Programme principal - Enveloppe convexe
-├── quadtree.c   # Implementation du Quadtree
-└── polygone.h   # Definitions des structures de donnees
+├── quadtree.c   # Implémentation du Quadtree
+└── polygone.h   # Définitions des structures de données
 ```
 
 ## Compilation
 
-### Prerequis
+### Prérequis
 
 - GCC ou Clang
-- Bibliotheque MLV installee
+- Bibliothèque MLV installée
 
 ### Compilation
 
@@ -78,39 +78,39 @@ sudo apt-get install libmlv3-dev
 - **Clic souris** : Ajouter un point
 - **Touche clavier** : Terminer et afficher l'enveloppe finale
 
-### Generation aleatoire
+### Génération aléatoire
 
 Modifiez la fonction `main()` pour utiliser :
 
 ```c
-// Points aleatoires dans un carre
+// Points aléatoires dans un carré
 ConvexHull p1 = point_alea_carre(100, centre, 150);
 
-// Points aleatoires dans un cercle
+// Points aléatoires dans un cercle
 ConvexHull p1 = point_alea_cercle(100, centre, 150);
 
-// Avec affichage etape par etape
+// Avec affichage étape par étape
 ConvexHull p1 = point_alea_carre_affiche(50, centre, 150);
 ```
 
 ## Algorithme d'enveloppe convexe
 
-L'algorithme utilise le **produit vectoriel** pour determiner l'orientation de trois points :
+L'algorithme utilise le **produit vectoriel** pour déterminer l'orientation de trois points :
 
 ```
 orientation(P1, P2, P3) = (P2.x - P3.x) * (P1.y - P3.y) - (P1.x - P3.x) * (P2.y - P3.y)
 ```
 
-- **< 0** : Rotation horaire (point a l'exterieur)
-- **> 0** : Rotation anti-horaire (point a l'interieur)
-- **= 0** : Points colineaires
+- **< 0** : Rotation horaire (point à l'extérieur)
+- **> 0** : Rotation anti-horaire (point à l'intérieur)
+- **= 0** : Points colinéaires
 
-### Complexite
+### Complexité
 
 - **Insertion** : O(n) dans le pire cas
-- **Construction complete** : O(n²) pour n points
+- **Construction complète** : O(n²) pour n points
 
-## Structure de donnees
+## Structure de données
 
 ### Point
 
@@ -120,7 +120,7 @@ typedef struct {
 } Point;
 ```
 
-### Liste doublement chainee circulaire
+### Liste doublement chaînée circulaire
 
 ```c
 typedef struct cellulePoint {
@@ -136,21 +136,19 @@ typedef struct cellulePoint {
 typedef struct {
     ListePoint pol;  // Liste des sommets
     int curlen;      // Nombre de sommets
-    int maxlen;      // Capacite maximale
+    int maxlen;      // Capacité maximale
 } ConvexHull;
 ```
 
-## Captures d'ecran
+## Captures d'écran
 
-Le programme affiche une fenetre 512x512 avec :
+Le programme affiche une fenêtre 512x512 avec :
 - Les points en blanc
 - L'enveloppe convexe en blanc (polygone)
 
 ## Applications
 
-- **Jeux video** : Detection de collisions
+- **Jeux vidéo** : Détection de collisions
 - **Robotique** : Planification de trajectoires
 - **SIG** : Analyse spatiale
-- **Computer Vision** : Detection de contours
-
-
+- **Computer Vision** : Détection de contours
